@@ -3,7 +3,7 @@
 <head lang="en-us">
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
-   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous"> 
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
     <script src="https://code.jquery.com/jquery.js"></script>
     <title>Battle Everypony</title>
@@ -13,13 +13,13 @@
     <h2>Choose your character, then battle your enemies one by one until they are all defeated!</h2>
     <div id="option-box" class="row">
             <div class="col-md-3">
-                <img id="twilight" class= "img pony" value="125"  src="assets/images/twilight.png">
+                <img id="twilight" class= "img pony" value="140"  src="assets/images/twilight.png">
             </div>
             <div class="col-md-3">
-                <img id="celestia" class="img pony" value="175" src="assets/images/celestia.png">
+                <img id="celestia" class="img pony" value="160" src="assets/images/celestia.png">
             </div>
             <div class="col-md-3">
-                <img id="nightmare" class="img pony" value="150" src="assets/images/nightmare.png">
+                <img id="nightmare" class="img pony" value="180" src="assets/images/nightmare.png">
             </div>
             <div class="col-md-3">
                 <img id="discord" class = "img pony" value= "200" src="assets/images/discord.png">
@@ -27,13 +27,18 @@
     </div>
 
     <div class="row"> 
-        <div class= "panel panel-default">
-            <div class="panel-heading">
-                <h3 class="panel-title">Enemies</h3>
+            <div class="col-md-2">
             </div>
-            <div id="enemy-box" class="panel-body">
+            <div class="col-md-8">
+                <div class= "card bg-light">
+                    <div class="card-header">
+                            <h4 class="card-title">Enemies</h4>
+                    </div>
+                    <div id="enemy-box" class="card-body">
+                    </div>
+                </div>
             </div>
-        </div>
+       
     </div>
 
     <div class="row">
@@ -41,32 +46,35 @@
         </div>
 
         <div class="col-md-3">
-            <div class= "panel panel-info">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Hero</h3>
+            <div class= "card">
+                <div class="card-header text-white bg-info">
+                    <h4 class="card-title">Hero</h4>
                 </div>
-                <div id="hero-box" class="panel-body">
+                <div id="hero-box" class="card-body">
                 </div>
-                <div id="hero-health" class="panel-footer">
+                <div id="hero-health" class="card-footer">
                 </div>
             </div>
         </div>
 
-        <div class="col-md-2">    
-            <div id="attack-button"></div>
-            <div id="attack-nar"></div>
-            <div id="message-box"></div>
-            <div id="restart"></div>
+        <div class="col-md-2"> 
+            <div class="text-center">
+                    <div id="attack-button"></div>
+                    <div id="attack-nar"></div>
+                    <div id="message-box"></div>
+                    <div id="restart"></div>
+            </div> 
+           
         </div>
 
         <div class="col-md-3">
-                <div class= "panel panel-danger">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">Challenger</h3>
+                <div class= "card">
+                    <div class="card-header text-white bg-danger">
+                        <h4 class="card-title">Challenger</h4>
                     </div>
-                    <div id="challenger-box" class="panel-body">
+                    <div id="challenger-box" class="card-body">
                     </div>
-                    <div id="challenger-health" class="panel-footer"></div>
+                    <div id="challenger-health" class="card-footer"></div>
                 </div>
             </div>
     </div>

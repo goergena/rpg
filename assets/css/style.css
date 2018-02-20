@@ -1,32 +1,30 @@
 img {
-    width: 150px;
-    height: 150px;
-    float: left;
-    margin-right: 20px;
+    width: 200px;
+    height: 200px;
 }
-
+/*
 #option-box {
     border: 2px solid green;
     overflow: auto;
-}
+} 
 
 #hero-box {
-    border: 2px solid blue;
     overflow: auto;
-
 }
+
 
 #enemy-box {
     border: 2px dashed magenta;
     overflow: auto;
     clear: both;
-}
+    width: 550px;
+    height: 175px;
+} 
 
 #challenger-box {
-    border: 5px solid red;
     overflow: auto;
 }
-
+*/
 .red-border {
     border: 10px solid red;
 }

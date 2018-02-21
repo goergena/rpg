@@ -1,4 +1,5 @@
 # rpg
+https://goergena.github.io/rpg/
 This is a role playing game made with jquery and styled with bootstrap.
 (note- this is my first draft of the game. I want to try making it again w new architecture: 
 -listeners on each character

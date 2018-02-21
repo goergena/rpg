@@ -5,6 +5,7 @@ $(document).ready(function(){
     var celestia = $("#celestia");
     var discord = $("#discord");
     var nightmare = $("#nightmare");
+    var runAndHide = 6;
 
     twilight.attr("attack", 14);
     twilight.attr("loser-img", "assets/images/twilight-defeated.jpeg");

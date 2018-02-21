@@ -6,11 +6,11 @@ $(document).ready(function(){
     var discord = $("#discord");
     var nightmare = $("#nightmare");
 
-    twilight.attr("attack", 8);
+    twilight.attr("attack", 14);
     twilight.attr("loser-img", "assets/images/twilight-defeated.jpeg");
-    celestia.attr("attack", 16);
+    celestia.attr("attack", 22);
     celestia.attr("loser-img", "assets/images/celestia-defeated.png");
-    discord.attr("attack", 12);
+    discord.attr("attack", 18);
     discord.attr("loser-img", "assets/images/discord-defeated.png");
     nightmare.attr("attack", 10);
     nightmare.attr("loser-img", "assets/images/nightmare-defeated.png");
@@ -55,7 +55,7 @@ $(document).ready(function(){
             wins ++;
             chalLoserImg = $(challenger).attr("loser-img");
             $(challenger).attr("src", chalLoserImg);
-            $(challenger).attr("class", "red-border img");
+            $(challenger).removeClass("pony");
             $("#challenger-box").empty();
             $("#enemy-box").append(challenger);
             isChallengerDefeated = true;
@@ -88,9 +88,10 @@ $(document).ready(function(){
         $("#enemy-box").append(celestia, discord, twilight, nightmare);
         $("#hero-box").append(this);
         hero = this;
+        $(hero).addClass("selected-img");
         heroHealth = parseInt($(this).attr("value"));
         heroAttack = parseInt($(this).attr("attack"));
-        $("#hero-health").append("Your health: " + heroHealth);
+        $("#hero-health").append("Health: " + heroHealth);
         isHeroChosen= true; 
         console.log(hero);
         }
@@ -103,10 +104,11 @@ $(document).ready(function(){
         $("#message-box").empty();
         $("#challenger-box").append(this);
         challenger = this;
+        $(challenger).addClass("selected-img");
         isChallengerChosen = true;
         challengerHealth = parseInt($(this).attr("value"));
         challengerAttack = parseInt($(this).attr("attack"));
-        $("#challenger-health").append("Challenger health: " + challengerHealth);
+        $("#challenger-health").append("Challenger Health: " + challengerHealth);
         $("#attack-button").append(attackBtn);
         
     }); 
@@ -133,5 +135,3 @@ $(document).ready(function(){
 
 
 }); //closes document.ready
-
-//dustin created an object of methods. had  variable operator is the string

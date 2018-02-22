@@ -34,7 +34,9 @@ img {
     opacity: 1.0;
 }
 
-
+p {
+    display: inline;
+}
 
 .hidden { 
     position: absolute; 

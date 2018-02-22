@@ -14,10 +14,10 @@
             <h2>Choose your character, then battle your enemies one by one until they are all defeated!</h2>
             <hr>
         <div id="option-box">
-                <img id="twilight" class= "img pony" value="180"  src="assets/images/twilight.png">
-                <img id="celestia" class="img pony" value="420" src="assets/images/celestia.png">
-                <img id="nightmare" class="img pony" value="260" src="assets/images/nightmare.png">
-                <img id="discord" class = "img pony" value= "200" src="assets/images/discord.png">
+                <button id="twilight" class= "pony" value="twilight"><img src="assets/images/twilight.png"></button>
+                <button id="celestia" class="pony" value="celestia"><img  src="assets/images/celestia.png"></button>
+                <button id="nightmare" class="pony" value="nightmare" ><img src="assets/images/nightmare.png"></button>
+                <button id="discord" class="pony" value= "discord"><img src="assets/images/discord.png"></button>
 
         </div>
 
@@ -29,11 +29,11 @@
             <div class="col-md-2">
             </div>
             <div class="col-md-8">
-                <div class= "card bg-light">
+                <div id="enemy-box" class= "card bg-light hidden">
                     <div class="card-header">
                             <h4 class="card-title">Enemies</h4>
                     </div>
-                    <div id="enemy-box" class="card-body bg-white">
+                    <div id="enemy-body" class="card-body bg-white">
                     </div>
                 </div>
             </div>
@@ -46,13 +46,14 @@
         </div>
 
         <div class="col-md-3">
-            <div class= "card">
+            <div id="hero-box" class= "card hidden">
                 <div class="card-header text-white bg-info">
                     <h4 class="card-title">Hero</h4>
                 </div>
-                <div id="hero-box" class="card-body">
+                <div id="hero-body" class="card-body">
                 </div>
-                <div id="hero-health" class="card-footer">
+                <div class="card-footer">Health:
+                    <p id="hero-health"></p>
                 </div>
             </div>
         </div>
@@ -68,17 +69,18 @@
         </div>
 
         <div class="col-md-3">
-                <div class= "card">
+                <div id="challenger-box" class= "card hidden">
                     <div class="card-header text-white bg-danger">
                         <h4 class="card-title">Challenger</h4>
                     </div>
-                    <div id="challenger-box" class="card-body">
+                    <div id="challenger-body" class="card-body">
                     </div>
-                    <div id="challenger-health" class="card-footer"></div>
+                    <div class="card-footer">Challenger Health:
+                        <p id="challenger-health"></p>
+                    </div>
                 </div>
             </div>
     </div>
-<!--<button id="restart-button" class="btn btn-success">Restart</button>  -->
 
     <script type="text/javascript" src="assets/javascript/game.js"></script>
 </body>

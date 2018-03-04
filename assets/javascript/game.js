@@ -81,8 +81,10 @@ $(document).ready(function(){
 
     function challengerDied() {
         wins ++;
-        $(".challenger-class").html("<img src=assets/images/" + challenger.loserImg + ">")
-        $("#challenger-box").empty();
+        $(".challenger-class").html("<img src=assets/images/" + challenger.loserImg + ">");
+        $(".challenger-class").attr("class", "defeated-class");
+        $("#challenger-body").empty();
+        $("#challenger-health").empty();
         $("#enemy-body").append(myChallenger);
         isChallengerDefeated = true;
         $("#message-box").append("You defeated your opponent! Choose another challenger");
@@ -114,7 +116,7 @@ $(document).ready(function(){
             heroIsHere();
             $("#hero-body").append(this);
             $("#hero-health").append(hero.health);
-            $(this).attr("class", "hero-class");
+            $(this).attr("class", "hero-class btn-block");
             isHeroChosen = true;
             //when you choose a hero, you generate the enemy and hero boxes everyone goes to the enemies      
     }); 
@@ -123,13 +125,17 @@ $(document).ready(function(){
         if (isChallengerChosen || this===myHero) {
             return false;
         }
+            $("#message-box").empty();
             myChallenger = this;
+            console.log(myChallenger);
             challenger = allPonies[$(this).val()];
-            $(this).attr("class", "challenger-class");
+            console.log($(this).val());
+            $(this).attr("class", "challenger-class btn-block");
             isChallengerChosen = true;
             $("#challenger-body").append(this);
             $("#challenger-health").append(challenger.health);
             $("#attack-button").append(attackBtn); 
+
     });
 
     function heroIsHere () {

@@ -1,78 +1,124 @@
-$(document).ready(function(){
+$(document).ready(function () {
+    //set all ids to variables
+    var twilightImg = $("#twilight");
+    var celestiaImg = $("#celestia");
+    var discordImg = $("#discord");
+    var nightmareImg = $("#nightmare");
 
-//set all ids to variables
-    var twilight = $("#twilight");
-    var celestia = $("#celestia");
-    var discord = $("#discord");
-    var nightmare = $("#nightmare");
+    var allPonies = {
+        twilight: {
+            health: 180,
+            attack: 14,
+            counter: 50,
+            loserImg: "twilight-defeated.jpeg",
+        },
+        celestia: {
+            health: 350,
+            attack: 16,
+            counter: 40,
+            loserImg: "celestia-defeated.png"
+        },
+        discord: {
+            health: 200,
+            attack: 18,
+            counter: 25,
+            loserImg: "discord-defeated.png"
+        },
+        nightmare: {
+            health: 250,
+            attack: 16,
+            counter: 10,
+            loserImg: "nightmare-defeated.png"
+        }
+    };
 
-    twilight.attr("attack", 14);
-    twilight.attr("loser-img", "assets/images/twilight-defeated.jpeg");
-    celestia.attr("attack", 22);
-    celestia.attr("loser-img", "assets/images/celestia-defeated.png");
-    discord.attr("attack", 18);
-    discord.attr("loser-img", "assets/images/discord-defeated.png");
-    nightmare.attr("attack", 10);
-    nightmare.attr("loser-img", "assets/images/nightmare-defeated.png");
-  
-    var isHeroChosen = false;
-    var isChallengerChosen = false;
-    var isChallengerDefeated = false;
-    var isHeroDefeated = false;
     var hero = "";
     var challenger = "";
-    var heroHealth = 100;
-    var challengerHealth = 100;
-    var heroAttack = 0;
-    var challengerAttack = 0;
+    var myChallenger = "";
     var currentAttack = 0;
     var wins = 0;
     var restartBtn = $("<button>Restart</button>");
     var attackBtn = $("<button>ATTACK!</button>");
-    attackBtn.attr("type", "button");
     attackBtn.addClass("btn btn-dark");
-    var heroLoserImg = "";
-    var chalLoserImg = "";
 
-    function makeRestartBtn() {
-        restartBtn.addClass("btn btn-success");
-        $("#restart").append(restartBtn);
+//when user clicks a pony, that one is selected as the hero & calls the heroIsHere function
+    $(".pony").on("click", function () {
+        if (!hero) {
+            hero = allPonies[$(this).val()];
+            heroIsHere();
+            $("#hero-body").append(this);
+            $("#hero-health").append(hero.health);
+            //the hero loses the pony class-- losing the click function and the hover
+            $(this).attr("class", "hero-class");
+        }
+    });
+//when a pony is clicked within the enemy box, it is chosen as the challenger.
+    $("#enemy-box").on("click", ".pony", function chooseChallenger() {
+        if (!myChallenger) {
+            $("#message-box, #attack-nar").empty();
+            myChallenger = this;
+            console.log(myChallenger);
+            challenger = allPonies[$(this).val()];
+            //challengers lose the pony class--losing the click function and the hover
+            $(this).removeClass("pony");
+            $("#challenger-body").append(this);
+            $("#challenger-health").append(challenger.health);
+            $("#attack-button").append(attackBtn);
+        }
+    });
+//the enemy box, hero box, and challenger boxes are made visible. The enemies are moved to the enemy box.
+    function heroIsHere() {
+        $("#enemy-box").removeClass("hidden");
+        $("#enemy-body").append(twilightImg, celestiaImg, discordImg, nightmareImg);
+        $("#hero-box").removeClass("hidden");
+        $("#challenger-box").removeClass("hidden");
+    };
+
+    $("#attack-button").on("click", function () {
+        heroAttack();
+        counterAttack();
+        if (wins === 3) {
+            youWon();
+        }
+    });
+
+    function heroAttack() {
+        currentAttack += hero.attack;
+        challenger.health -= currentAttack;
+        $("#attack-nar").text("You attacked for " + currentAttack + " damage!")
+        $("#challenger-health").text(challenger.health);
+        if (challenger.health <= 0 && hero.health > 0) {
+            challengerDied();
+        };
     }
 
-    function attackTime () {
-        currentAttack += heroAttack;
-        heroHealth -= challengerAttack;
-        if (heroHealth<=0) {
-            isHeroDefeated = true;
-            $("#message-box").append("You lost!");
-            heroLoserImg = $(hero).attr("loser-img");
-            $(hero).attr("src", heroLoserImg);
-            makeRestartBtn();
-        };
-
-        challengerHealth -= currentAttack;
-        if (challengerHealth<=0 && heroHealth >0) {
-            wins ++;
-            chalLoserImg = $(challenger).attr("loser-img");
-            $(challenger).attr("src", chalLoserImg);
-            $(challenger).removeClass("pony");
-            $("#challenger-box").empty();
-            $("#enemy-box").append(challenger);
-            isChallengerDefeated = true;
-            $("#message-box").append("You defeated your opponent! Choose another challenger");
-        } 
-        $("#attack-nar").text("You attacked for " + currentAttack + " damage! Your opponent attacked and you took " + challengerAttack + " damage!");
-        $("#hero-health").text("Your health: " + heroHealth);
-        $("#challenger-health").text("Challenger health: " + challengerHealth);
-    } ;
-
-    function chooseNewChallenger() {
-        isChallengerChosen= false;
-        isChallengerDefeated = false;
-        challenger = "";
-        challengerHealth = 0;
-        $("#challenger-health, #attack-button, #attack-nar").empty();
+    function counterAttack() {
+        if (challenger.health > 0) {
+            hero.health -= challenger.counter;
+            //if hero dies, the attack button disappears, restart button appears, hero image changes
+            if (hero.health <= 0) {
+                $("#message-box").append("You lost!");
+                $(".hero-class").html("<img src='assets/images/" + hero.loserImg + "' class='img-fluid'>");
+                makeRestartBtn();
+                $("#attack-button").empty();
+            };
+            $("#attack-nar").append("<div>Your opponent attacked and you took " + challenger.counter + " damage!</div>");
+            $("#hero-health").text(hero.health);
+        }
     };
+
+    //when a challenger is defeated, their image changes, they return to the enemy box (but user can't battle them again)
+    //challenger and myChallenger are cleared so that user can select a new challenger.
+    function challengerDied() {
+        wins++;
+        $(myChallenger).html("<img src='assets/images/" + challenger.loserImg + "' class='img-fluid'>");
+        $(myChallenger).addClass("defeated");
+        $("#enemy-body").append(myChallenger);
+        $("#challenger-body, #challenger-health, #attack-button").empty();
+        $("#message-box").append("You defeated your opponent! Choose another challenger");
+        challenger = "";
+        myChallenger = "";
+    }
 
     function youWon() {
         $("#attack-nar").empty();
@@ -80,58 +126,13 @@ $(document).ready(function(){
         makeRestartBtn();
     };
 
-
-    $(".pony").on("click", function() {
-        if (isHeroChosen) {
-            return false;
-        } else {
-        $("#enemy-box").append(celestia, discord, twilight, nightmare);
-        $("#hero-box").append(this);
-        hero = this;
-        $(hero).addClass("selected-img");
-        heroHealth = parseInt($(this).attr("value"));
-        heroAttack = parseInt($(this).attr("attack"));
-        $("#hero-health").append("Health: " + heroHealth);
-        isHeroChosen= true; 
-        console.log(hero);
-        }
-    });
-
-    $(".pony").on("click", function chooseChallenger(){
-        if (isChallengerChosen || this===hero || isHeroChosen===false) {
-            return false;
-        } 
-        $("#message-box").empty();
-        $("#challenger-box").append(this);
-        challenger = this;
-        $(challenger).addClass("selected-img");
-        isChallengerChosen = true;
-        challengerHealth = parseInt($(this).attr("value"));
-        challengerAttack = parseInt($(this).attr("attack"));
-        $("#challenger-health").append("Challenger Health: " + challengerHealth);
-        $("#attack-button").append(attackBtn);
-        
-    }); 
-
-
-    $("#attack-button").on("click", function() {
-        if (isChallengerDefeated || isHeroDefeated) {
-            return false;
-        } else {
-            attackTime();
-        }
-        if (isChallengerDefeated) {
-            chooseNewChallenger();
-        }
-        if (wins===3) {
-            youWon();
-        }
-   
-    });
-
     $("#restart").on("click", function () {
         document.location.reload(true);
     });
 
+    function makeRestartBtn() {
+        restartBtn.addClass("btn btn-success");
+        $("#restart").append(restartBtn);
+    }
 
 }); //closes document.ready

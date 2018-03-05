@@ -3,9 +3,6 @@ body {
 }
 
 .jumbotron {
-   /* background-color: rgba (155 155 155 0.25);
-   background: lightslategray; */
-   /*opacity: 0.6; */
    background: none;
 }
 
@@ -20,17 +17,26 @@ h4 {
     font-size: 18px;
 }
 
-img {
-    width: auto;
+.defeated {
     max-width: 250px;
-    height: 200px;
-    opacity: 0.7; 
+}
+.pony {
+    opacity: 0.7;
+    max-width: 250px;
 }
 
-img:hover {
+.pony:hover {
     opacity: 1.0;
 }
 
-.selected-img {
-    opacity: 1.0;
+p {
+    display: inline;
 }
+
+.hidden { 
+    position: absolute; 
+    overflow: hidden; 
+    clip: rect(0 0 0 0); 
+    height: 1px; width: 1px; 
+    margin: -1px; padding: 0; border: 0; 
+  }

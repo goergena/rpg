@@ -3,9 +3,6 @@ body {
 }
 
 .jumbotron {
-   /* background-color: rgba (155 155 155 0.25);
-   background: lightslategray; */
-   /*opacity: 0.6; */
    background: none;
 }
 
@@ -20,14 +17,12 @@ h4 {
     font-size: 18px;
 }
 
-img {
-    width: auto;
+.defeated {
     max-width: 250px;
-    height: 200px;
 }
-
 .pony {
     opacity: 0.7;
+    max-width: 250px;
 }
 
 .pony:hover {
